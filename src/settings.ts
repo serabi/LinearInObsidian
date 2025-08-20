@@ -17,7 +17,7 @@ export class LinearSettingTab extends PluginSettingTab {
 
 		new Setting(containerEl)
 			.setName('Linear API Key')
-			.setDesc('Your personal Linear API key. You can create one in Linear Settings > API.')
+			.setDesc('Your personal Linear API key. You can create one in Linear Settings > Security & Access > API Key.')
 			.addText(text => text
 				.setPlaceholder('lin_api_...')
 				.setValue(this.plugin.settings.linearApiKey)

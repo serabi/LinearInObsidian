@@ -507,7 +507,7 @@ export class LinearIssueEmbed {
 			.linear-embed-compact {
 				display: flex;
 				align-items: center;
-				gap: 0.5rem;
+				gap: 1rem;
 				padding: 0.5rem;
 				border: 1px solid var(--background-modifier-border);
 				border-radius: 4px;

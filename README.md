@@ -63,7 +63,7 @@ interactive=true
 
 ### 1. Get Your Linear API Key
 
-1. Go to [Linear Settings](https://linear.app/settings/api)
+1. Go to [Linear Settings](https://linear.app/settings/api) or `Linear Settings > Security & Access > API Key`
 2. Click "Create new API key"
 3. Give it a descriptive name (e.g., "Linear in Obsidian Plugin")
 4. Copy the generated API key (starts with `lin_api_`)
