@@ -1,0 +1,48 @@
+{
+	"name": "linear-in-obsidian",
+	"version": "2.0.0",
+	"description": "A powerful Obsidian plugin that brings Linear project management directly into your knowledge workspace with comprehensive issue tracking, project views, and bidirectional linking",
+	"main": "main.js",
+	"scripts": {
+		"dev": "node esbuild.config.mjs",
+		"build": "tsc -noEmit -skipLibCheck && node esbuild.config.mjs production",
+		"version": "node version-bump.mjs && git add manifest.json versions.json",
+		"lint": "eslint src/ --ext .ts",
+		"typecheck": "tsc --noEmit"
+	},
+	"keywords": [
+		"obsidian",
+		"plugin",
+		"linear",
+		"project-management",
+		"issues",
+		"productivity",
+		"knowledge-management",
+		"api-integration",
+		"task-tracking",
+		"note-linking"
+	],
+	"author": "Sarah Wolff Milligan",
+	"license": "MIT",
+	"homepage": "https://github.com/sarahwolffmilligan/linear-in-obsidian#readme",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/sarahwolffmilligan/linear-in-obsidian.git"
+	},
+	"bugs": {
+		"url": "https://github.com/sarahwolffmilligan/linear-in-obsidian/issues"
+	},
+	"devDependencies": {
+		"@types/node": "^16.11.6",
+		"@typescript-eslint/eslint-plugin": "5.29.0",
+		"@typescript-eslint/parser": "5.29.0",
+		"builtin-modules": "3.3.0",
+		"esbuild": "^0.25.9",
+		"obsidian": "latest",
+		"tslib": "2.4.0",
+		"typescript": "4.7.4"
+	},
+	"dependencies": {
+		"@linear/sdk": "^22.0.0"
+	}
+}

@@ -1,0 +1,110 @@
+/* Linear in Obsidian Plugin Styles */
+
+.linear-issue-embed {
+    border: 1px solid var(--background-modifier-border);
+    border-radius: 8px;
+    padding: 16px;
+    margin: 8px 0;
+    background-color: var(--background-secondary);
+}
+
+.linear-issue-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.linear-issue-id {
+    font-weight: 600;
+    color: var(--text-accent);
+    text-decoration: none;
+}
+
+.linear-issue-id:hover {
+    text-decoration: underline;
+}
+
+.linear-issue-title {
+    font-size: 1.1em;
+    font-weight: 500;
+    color: var(--text-normal);
+    margin-bottom: 8px;
+}
+
+.linear-issue-description {
+    color: var(--text-muted);
+    font-size: 0.9em;
+    line-height: 1.4;
+    margin-bottom: 12px;
+}
+
+.linear-issue-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    font-size: 0.85em;
+    color: var(--text-muted);
+}
+
+.linear-issue-status,
+.linear-issue-priority,
+.linear-issue-assignee {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.linear-status-badge {
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 0.8em;
+    font-weight: 500;
+}
+
+.linear-status-todo {
+    background-color: var(--background-modifier-border);
+    color: var(--text-normal);
+}
+
+.linear-status-in-progress {
+    background-color: var(--color-accent);
+    color: var(--text-on-accent);
+}
+
+.linear-status-done {
+    background-color: var(--color-green);
+    color: white;
+}
+
+.linear-priority-urgent {
+    color: var(--color-red);
+}
+
+.linear-priority-high {
+    color: var(--color-orange);
+}
+
+.linear-priority-medium {
+    color: var(--color-yellow);
+}
+
+.linear-priority-low {
+    color: var(--text-muted);
+}
+
+.linear-error {
+    color: var(--color-red);
+    font-style: italic;
+    padding: 8px;
+    background-color: var(--background-secondary);
+    border-left: 3px solid var(--color-red);
+    margin: 8px 0;
+}
+
+.linear-loading {
+    color: var(--text-muted);
+    font-style: italic;
+    text-align: center;
+    padding: 20px;
+}
