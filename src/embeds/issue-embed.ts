@@ -1,4 +1,5 @@
 import { LinearIssue } from '../types';
+import { debugLogger } from '../debug';
 
 export type EmbedFormat = 'compact' | 'card' | 'detailed' | 'badge' | 'progress' | 'developer' | 'executive';
 
@@ -65,15 +66,26 @@ export class LinearIssueEmbed {
 		this.issue = issue;
 		this.options = { ...DEFAULT_EMBED_OPTIONS, ...options };
 		this.plugin = plugin;
+
+		debugLogger.log('Linear Embed Constructor', 'Creating embed for issue:', this.issue.identifier);
+		debugLogger.log('Linear Embed Constructor', 'DEFAULT_EMBED_OPTIONS:', DEFAULT_EMBED_OPTIONS);
+		debugLogger.log('Linear Embed Constructor', 'Passed options:', options);
+		debugLogger.log('Linear Embed Constructor', 'Final merged options:', this.options);
 	}
 
 	render(): void {
+		debugLogger.log('Linear Embed Render', 'Starting render for format:', this.options.format);
+		debugLogger.log('Linear Embed Render', 'All render options:', this.options);
+		
 		this.container.empty();
 		this.container.addClass('linear-issue-embed');
 		this.container.addClass(`linear-embed-${this.options.format}`);
 
+		debugLogger.log('Linear Embed Render', 'Added CSS classes:', ['linear-issue-embed', `linear-embed-${this.options.format}`]);
+
 		switch (this.options.format) {
 			case 'compact':
+				debugLogger.log('Linear Embed Render', 'Calling renderCompact()');
 				this.renderCompact();
 				break;
 			case 'badge':
@@ -100,29 +112,37 @@ export class LinearIssueEmbed {
 		if (this.options.interactive) {
 			this.addInteractiveElements();
 		}
-
-		this.addStyles();
 	}
 
 	private renderCompact(): void {
+		debugLogger.log('Linear Embed Compact', 'Starting renderCompact for issue:', this.issue.identifier);
+		
 		const compact = this.container.createDiv('linear-embed-compact');
+		debugLogger.log('Linear Embed Compact', 'Created compact container with class:', 'linear-embed-compact');
 		
 		const header = compact.createDiv('linear-embed-header');
+		debugLogger.log('Linear Embed Compact', 'Created header container with class:', 'linear-embed-header');
 		
 		header.createSpan({
 			text: this.issue.identifier,
 			cls: 'linear-embed-identifier'
 		});
+		debugLogger.log('Linear Embed Compact', 'Created identifier span:', this.issue.identifier, 'with class:', 'linear-embed-identifier');
 
 		header.createSpan({
 			text: this.issue.title,
 			cls: 'linear-embed-title'
 		});
+		debugLogger.log('Linear Embed Compact', 'Created title span:', this.issue.title, 'with class:', 'linear-embed-title');
 
 		header.createSpan({
 			text: this.issue.state.name,
 			cls: `linear-embed-state linear-state-${this.issue.state.type}`
 		});
+		debugLogger.log('Linear Embed Compact', 'Created state span:', this.issue.state.name, 'with classes:', [`linear-embed-state`, `linear-state-${this.issue.state.type}`]);
+		
+		debugLogger.log('Linear Embed Compact', 'Finished renderCompact - checking final DOM structure');
+		debugLogger.log('Linear Embed Compact', 'Compact container HTML:', compact.outerHTML);
 	}
 
 	private renderBadge(): void {
@@ -490,289 +510,5 @@ export class LinearIssueEmbed {
 		return luminance > 0.5 ? '#000000' : '#ffffff';
 	}
 
-	private addStyles(): void {
-		// Only add styles if not already added
-		if (document.querySelector('#linear-embed-styles')) {
-			return;
-		}
 
-		const style = document.createElement('style');
-		style.id = 'linear-embed-styles';
-		style.textContent = `
-			.linear-issue-embed {
-				margin: 0.5rem 0;
-				font-family: var(--font-interface);
-			}
-
-			.linear-embed-compact {
-				display: flex;
-				align-items: center;
-				gap: 1rem;
-				padding: 0.5rem;
-				border: 1px solid var(--background-modifier-border);
-				border-radius: 4px;
-				background: var(--background-secondary);
-			}
-
-			.linear-embed-badge {
-				display: inline-flex;
-				align-items: center;
-				gap: 0.25rem;
-				padding: 0.25rem 0.5rem;
-				border-radius: 12px;
-				background: var(--background-modifier-border);
-				font-size: 0.8em;
-			}
-
-			.linear-embed-card {
-				border: 1px solid var(--background-modifier-border);
-				border-radius: 6px;
-				padding: 1rem;
-				background: var(--background-secondary);
-				transition: all 0.2s ease;
-			}
-
-			.linear-embed-card:hover {
-				border-color: var(--text-accent);
-				transform: translateY(-1px);
-				box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-			}
-
-			.linear-embed-detailed {
-				max-width: none;
-			}
-
-			.linear-embed-card-header {
-				display: flex;
-				align-items: center;
-				gap: 0.5rem;
-				margin-bottom: 0.5rem;
-			}
-
-			.linear-embed-identifier {
-				font-family: var(--font-monospace);
-				font-weight: bold;
-				color: var(--text-accent);
-				font-size: 0.9em;
-			}
-
-			.linear-badge-identifier {
-				font-family: var(--font-monospace);
-				font-weight: bold;
-				font-size: 0.8em;
-			}
-
-			.linear-embed-card-title {
-				font-weight: 600;
-				font-size: 1.1em;
-				margin-bottom: 0.5rem;
-				line-height: 1.3;
-			}
-
-			.linear-embed-title {
-				font-weight: 500;
-				flex-grow: 1;
-			}
-
-			.linear-embed-card-meta {
-				display: flex;
-				gap: 0.5rem;
-				margin-bottom: 0.75rem;
-				flex-wrap: wrap;
-			}
-
-			.linear-embed-card-meta > span {
-				padding: 0.2rem 0.4rem;
-				border-radius: 3px;
-				font-size: 0.8em;
-				background: var(--background-modifier-border);
-			}
-
-			.linear-embed-description {
-				color: var(--text-muted);
-				font-size: 0.9em;
-				line-height: 1.4;
-				margin-bottom: 0.5rem;
-			}
-
-			.linear-embed-full-description {
-				color: var(--text-muted);
-				font-size: 0.9em;
-				line-height: 1.5;
-				margin-top: 0.75rem;
-				padding-top: 0.75rem;
-				border-top: 1px solid var(--background-modifier-border);
-			}
-
-			.linear-embed-dates {
-				display: flex;
-				gap: 1rem;
-				font-size: 0.8em;
-				color: var(--text-muted);
-				margin-top: 0.5rem;
-			}
-
-			.linear-embed-project {
-				margin-top: 0.5rem;
-				font-size: 0.9em;
-			}
-
-			.linear-embed-project-name {
-				font-weight: 500;
-				color: var(--text-accent);
-			}
-
-			.linear-embed-actions {
-				display: flex;
-				gap: 0.5rem;
-				margin-top: 0.75rem;
-				padding-top: 0.75rem;
-				border-top: 1px solid var(--background-modifier-border);
-			}
-
-			.linear-embed-action {
-				padding: 0.3rem 0.6rem;
-				border: 1px solid var(--background-modifier-border);
-				border-radius: 4px;
-				background: var(--background-primary);
-				color: var(--text-normal);
-				cursor: pointer;
-				font-size: 0.8em;
-				transition: all 0.2s ease;
-			}
-
-			.linear-embed-action:hover {
-				background: var(--background-modifier-hover);
-				border-color: var(--text-accent);
-			}
-
-			.linear-embed-progress {
-				margin-top: 0.75rem;
-			}
-
-			.linear-progress-bar {
-				height: 6px;
-				background: var(--background-modifier-border);
-				border-radius: 3px;
-				overflow: hidden;
-				margin-bottom: 0.25rem;
-			}
-
-			.linear-progress-fill {
-				height: 100%;
-				background: linear-gradient(90deg, var(--color-blue), var(--color-green));
-				transition: width 0.3s ease;
-			}
-
-			.linear-progress-text {
-				font-size: 0.8em;
-				color: var(--text-muted);
-			}
-
-			/* State-specific styling */
-			.linear-state-unstarted { background: var(--background-modifier-border) !important; color: var(--text-muted); }
-			.linear-state-started { background: var(--color-blue) !important; color: white; }
-			.linear-state-completed { background: var(--color-green) !important; color: white; }
-			.linear-state-canceled { background: var(--color-red) !important; color: white; }
-
-			.linear-priority-1 { background: var(--color-red) !important; color: white; }
-			.linear-priority-2 { background: var(--color-orange) !important; color: white; }
-			.linear-priority-3 { background: var(--color-yellow) !important; }
-			.linear-priority-4 { background: var(--background-modifier-border) !important; }
-
-			/* Badge specific styles */
-			.linear-badge-state {
-				padding: 0.2rem 0.4rem;
-				border-radius: 8px;
-				font-size: 0.75em;
-				font-weight: 500;
-			}
-
-			/* New enhanced styles */
-			.linear-embed-labels {
-				display: flex;
-				gap: 0.25rem;
-				margin: 0.5rem 0;
-				flex-wrap: wrap;
-			}
-
-			.linear-embed-label {
-				padding: 0.2rem 0.5rem;
-				border-radius: 12px;
-				font-size: 0.75em;
-				font-weight: 500;
-				border: 1px solid rgba(255, 255, 255, 0.2);
-			}
-
-			.linear-embed-due-date {
-				margin: 0.5rem 0;
-				font-size: 0.9em;
-			}
-
-			.linear-embed-due {
-				padding: 0.3rem 0.6rem;
-				border-radius: 4px;
-				background: var(--background-modifier-border);
-			}
-
-			.linear-embed-overdue {
-				background: var(--color-red) !important;
-				color: white !important;
-			}
-
-			.linear-embed-branch {
-				margin: 0.5rem 0;
-				font-size: 0.85em;
-				color: var(--text-muted);
-			}
-
-			.linear-embed-branch-name {
-				font-family: var(--font-monospace);
-				background: var(--background-modifier-border);
-				padding: 0.2rem 0.4rem;
-				border-radius: 3px;
-			}
-
-			.linear-embed-counts {
-				display: flex;
-				gap: 1rem;
-				margin: 0.5rem 0;
-				font-size: 0.85em;
-			}
-
-			.linear-embed-comment-count,
-			.linear-embed-attachment-count {
-				color: var(--text-muted);
-			}
-
-			.linear-embed-url {
-				margin: 0.5rem 0;
-				font-size: 0.85em;
-			}
-
-			.linear-embed-link {
-				color: var(--text-accent);
-				text-decoration: none;
-				font-family: var(--font-monospace);
-			}
-
-			.linear-embed-link:hover {
-				text-decoration: underline;
-			}
-
-			.linear-embed-creator,
-			.linear-embed-project,
-			.linear-embed-cycle,
-			.linear-embed-estimate {
-				font-size: 0.8em;
-			}
-
-			.linear-embed-estimate {
-				background: var(--color-blue) !important;
-				color: white !important;
-				font-weight: 600;
-			}
-		`;
-		document.head.appendChild(style);
-	}
 }

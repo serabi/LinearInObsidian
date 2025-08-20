@@ -1,13 +1,348 @@
 /* Linear in Obsidian Plugin Styles */
 
+/* Base styles */
 .linear-issue-embed {
-    border: 1px solid var(--background-modifier-border);
-    border-radius: 8px;
-    padding: 16px;
-    margin: 8px 0;
-    background-color: var(--background-secondary);
+    margin: 0.5rem 0;
+    font-family: var(--font-interface);
 }
 
+/* Compact view styles - with higher specificity for spacing */
+.linear-issue-embed.linear-embed-compact {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.5rem;
+    border: 1px solid var(--background-modifier-border);
+    border-radius: 4px;
+    background: var(--background-secondary);
+}
+
+.linear-issue-embed.linear-embed-compact .linear-embed-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    width: 100%;
+}
+
+.linear-issue-embed.linear-embed-compact .linear-embed-identifier {
+    margin-right: 1rem;
+    font-family: var(--font-monospace);
+    font-weight: bold;
+    color: var(--text-accent);
+    font-size: 0.9em;
+}
+
+.linear-issue-embed.linear-embed-compact .linear-embed-title {
+    margin-right: 1rem;
+    flex: 1;
+    font-weight: 500;
+}
+
+.linear-issue-embed.linear-embed-compact .linear-embed-state {
+    margin-left: auto;
+    padding: 0.2rem 0.4rem;
+    border-radius: 3px;
+    font-size: 0.8em;
+    font-weight: 500;
+}
+
+/* Badge view styles */
+.linear-embed-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: 12px;
+    background: var(--background-modifier-border);
+    font-size: 0.8em;
+}
+
+.linear-badge-identifier {
+    font-family: var(--font-monospace);
+    font-weight: bold;
+    font-size: 0.8em;
+}
+
+.linear-badge-state {
+    padding: 0.2rem 0.4rem;
+    border-radius: 8px;
+    font-size: 0.75em;
+    font-weight: 500;
+}
+
+/* Card view styles */
+.linear-embed-card {
+    border: 1px solid var(--background-modifier-border);
+    border-radius: 6px;
+    padding: 1rem;
+    background: var(--background-secondary);
+    transition: all 0.2s ease;
+}
+
+.linear-embed-card:hover {
+    border-color: var(--text-accent);
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.linear-embed-detailed {
+    max-width: none;
+}
+
+.linear-embed-card-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.linear-embed-identifier {
+    font-family: var(--font-monospace);
+    font-weight: bold;
+    color: var(--text-accent);
+    font-size: 0.9em;
+}
+
+.linear-embed-card-title {
+    font-weight: 600;
+    font-size: 1.1em;
+    margin-bottom: 0.5rem;
+    line-height: 1.3;
+}
+
+.linear-embed-title {
+    font-weight: 500;
+    flex-grow: 1;
+}
+
+.linear-embed-card-meta {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.linear-embed-card-meta > span {
+    padding: 0.2rem 0.4rem;
+    border-radius: 3px;
+    font-size: 0.8em;
+    background: var(--background-modifier-border);
+    display: inline-flex;
+    align-items: center;
+}
+
+/* Fix alignment for project spans in meta container */
+.linear-embed-card-meta .linear-embed-project {
+    margin-top: 0;
+}
+
+.linear-embed-description {
+    color: var(--text-muted);
+    font-size: 0.9em;
+    line-height: 1.4;
+    margin-bottom: 0.5rem;
+}
+
+.linear-embed-full-description {
+    color: var(--text-muted);
+    font-size: 0.9em;
+    line-height: 1.5;
+    margin-top: 0.75rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid var(--background-modifier-border);
+}
+
+.linear-embed-dates {
+    display: flex;
+    gap: 1rem;
+    font-size: 0.8em;
+    color: var(--text-muted);
+    margin-top: 0.5rem;
+}
+
+.linear-embed-project {
+    margin-top: 0.5rem;
+    font-size: 0.9em;
+}
+
+.linear-embed-project-name {
+    font-weight: 500;
+    color: var(--text-accent);
+}
+
+.linear-embed-actions {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 0.75rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid var(--background-modifier-border);
+}
+
+.linear-embed-action {
+    padding: 0.3rem 0.6rem;
+    border: 1px solid var(--background-modifier-border);
+    border-radius: 4px;
+    background: var(--background-primary);
+    color: var(--text-normal);
+    cursor: pointer;
+    font-size: 0.8em;
+    transition: all 0.2s ease;
+}
+
+.linear-embed-action:hover {
+    background: var(--background-modifier-hover);
+    border-color: var(--text-accent);
+}
+
+.linear-embed-progress {
+    margin-top: 0.75rem;
+}
+
+.linear-progress-bar {
+    height: 6px;
+    background: var(--background-modifier-border);
+    border-radius: 3px;
+    overflow: hidden;
+    margin-bottom: 0.25rem;
+}
+
+.linear-progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--color-blue), var(--color-green));
+    transition: width 0.3s ease;
+}
+
+.linear-progress-text {
+    font-size: 0.8em;
+    color: var(--text-muted);
+}
+
+/* State-specific styling */
+.linear-state-unstarted { 
+    background: var(--background-modifier-border); 
+    color: var(--text-muted); 
+}
+
+.linear-state-started { 
+    background: var(--color-blue); 
+    color: white; 
+}
+
+.linear-state-completed { 
+    background: var(--color-green); 
+    color: white; 
+}
+
+.linear-state-canceled { 
+    background: var(--color-red); 
+    color: white; 
+}
+
+.linear-priority-1 { 
+    background: var(--color-red); 
+    color: white; 
+}
+
+.linear-priority-2 { 
+    background: var(--color-orange); 
+    color: white; 
+}
+
+.linear-priority-3 { 
+    background: var(--color-yellow); 
+}
+
+.linear-priority-4 { 
+    background: var(--background-modifier-border); 
+}
+
+/* Enhanced styles */
+.linear-embed-labels {
+    display: flex;
+    gap: 0.25rem;
+    margin: 0.5rem 0;
+    flex-wrap: wrap;
+}
+
+.linear-embed-label {
+    padding: 0.2rem 0.5rem;
+    border-radius: 12px;
+    font-size: 0.75em;
+    font-weight: 500;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.linear-embed-due-date {
+    margin: 0.5rem 0;
+    font-size: 0.9em;
+}
+
+.linear-embed-due {
+    padding: 0.3rem 0.6rem;
+    border-radius: 4px;
+    background: var(--background-modifier-border);
+}
+
+.linear-embed-overdue {
+    background: var(--color-red);
+    color: white;
+}
+
+.linear-embed-branch {
+    margin: 0.5rem 0;
+    font-size: 0.85em;
+    color: var(--text-muted);
+}
+
+.linear-embed-branch-name {
+    font-family: var(--font-monospace);
+    background: var(--background-modifier-border);
+    padding: 0.2rem 0.4rem;
+    border-radius: 3px;
+}
+
+.linear-embed-counts {
+    display: flex;
+    gap: 1rem;
+    margin: 0.5rem 0;
+    font-size: 0.85em;
+}
+
+.linear-embed-comment-count,
+.linear-embed-attachment-count {
+    color: var(--text-muted);
+}
+
+.linear-embed-url {
+    margin: 0.5rem 0;
+    font-size: 0.85em;
+}
+
+.linear-embed-link {
+    color: var(--text-accent);
+    text-decoration: none;
+    font-family: var(--font-monospace);
+}
+
+.linear-embed-link:hover {
+    text-decoration: underline;
+}
+
+.linear-embed-creator,
+.linear-embed-project,
+.linear-embed-cycle,
+.linear-embed-estimate {
+    font-size: 0.8em;
+}
+
+.linear-embed-estimate {
+    background: var(--color-blue);
+    color: white;
+    font-weight: 600;
+}
+
+/* Legacy styles for compatibility */
 .linear-issue-header {
     display: flex;
     align-items: center;
