@@ -1,0 +1,11 @@
+{
+	"id": "linear-in-obsidian",
+	"name": "Linear Issue Embeds",
+	"version": "2.0.0",
+	"minAppVersion": "0.15.0",
+	"description": "Embed Linear issues directly into your Obsidian notes with beautiful, customizable displays",
+	"author": "Your Name",
+	"authorUrl": "",
+	"fundingUrl": "",
+	"isDesktopOnly": false
+}
