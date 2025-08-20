@@ -1,6 +1,6 @@
-# Linear Issue Embeds
+# Linear In Obsidian
 
-A focused Obsidian plugin that embeds Linear issues directly into your notes with beautiful, customizable displays. Perfect for documentation, meeting notes, project tracking, and maintaining context between your knowledge base and development work.
+A focused Obsidian plugin that embeds Linear issues directly into your Obsidian notes.
 
 ## Features
 
@@ -65,7 +65,7 @@ interactive=true
 
 1. Go to [Linear Settings](https://linear.app/settings/api)
 2. Click "Create new API key"
-3. Give it a descriptive name (e.g., "Obsidian Plugin")
+3. Give it a descriptive name (e.g., "Linear in Obsidian Plugin")
 4. Copy the generated API key (starts with `lin_api_`)
 
 ### 2. Configure the Plugin
@@ -349,8 +349,8 @@ npm run version # Update version numbers
 
 ## Support
 
-- **Issues**: [GitHub Issues](https://github.com/yourusername/linear-issue-embeds/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/yourusername/linear-issue-embeds/discussions)
+- **Issues**: [GitHub Issues](https://github.com/serabi/LinearInObsidian/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/serabi/LinearInObsidian/discussions)
 
 ## License
 
@@ -358,16 +358,15 @@ MIT License - see [LICENSE](LICENSE) file for details.
 
 ## Changelog
 
-### v1.0.0
+### v2.0.0
 - **Initial Release**: Clean, focused Linear issue embedding plugin for Obsidian
 - **Read-Only Design**: View Linear issues without accidentally modifying them
 - **7 Embed Formats**: Compact, card, detailed, badge, progress, developer, and executive views
 - **20+ Customization Options**: Control visibility of description, assignee, priority, labels, dates, and more
-- **Click to Open**: Direct integration with Linear - click any embed to open in Linear
+- **Click to Open**: Click any embed to open in Linear
 - **Manual Refresh**: Individual embed refresh buttons for latest data
 - **Theme Integration**: Automatically matches your Obsidian theme
-- **Performance Optimized**: Cached data for fast loading
 
 ---
 
-**Made for the Obsidian and Linear communities**
+**Made by [Sarah Wolff](mailto:sarah@serabi.dev) for the Obsidian and Linear communities**
