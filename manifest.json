@@ -1,7 +1,7 @@
 {
 	"id": "linear-in-obsidian",
 	"name": "Linear In Obsidian",
-	"version": "1.0.2",
+	"version": "1.0.3",
 	"minAppVersion": "0.15.0",
 	"description": "Embed Linear issues directly into your Obsidian notes with beautiful, customizable displays",
 	"author": "Sarah Wolff (serabi)",

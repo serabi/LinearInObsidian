@@ -446,6 +446,13 @@ export class LinearService {
 		}
 	}
 
+	private toSafeISOString(dateValue: any): string | undefined {
+		if (!dateValue) return undefined;
+		if (typeof dateValue === 'string') return dateValue; // Already ISO string
+		if (dateValue instanceof Date) return dateValue.toISOString();
+		return undefined; // Invalid input
+	}
+
 	private async buildIssueObject(issue: any): Promise<LinearIssue> {
 		console.log('[Linear Service] Building issue object for:', issue.identifier);
 		
@@ -478,10 +485,10 @@ export class LinearService {
 			title: issue.title,
 			description: issue.description || undefined,
 			priority: issue.priority,
-			createdAt: issue.createdAt.toISOString(),
-			updatedAt: issue.updatedAt.toISOString(),
-			completedAt: issue.completedAt?.toISOString(),
-			dueDate: issue.dueDate?.toISOString(),
+			createdAt: this.toSafeISOString(issue.createdAt)!,
+			updatedAt: this.toSafeISOString(issue.updatedAt)!,
+			completedAt: this.toSafeISOString(issue.completedAt),
+			dueDate: this.toSafeISOString(issue.dueDate),
 			estimate: issue.estimate || undefined,
 			url: issue.url || `https://linear.app/issue/${issue.identifier}`,
 			branchName: issue.branchName || undefined,
@@ -516,7 +523,7 @@ export class LinearService {
 				id: cycle.id,
 				name: cycle.name,
 				number: cycle.number || undefined,
-				completedAt: cycle.completedAt?.toISOString()
+				completedAt: this.toSafeISOString(cycle.completedAt)
 			} : undefined,
 			labels: labels && labels.nodes ? labels.nodes.map((label: any) => ({
 				id: label.id,
@@ -526,7 +533,7 @@ export class LinearService {
 			comments: comments && comments.nodes ? comments.nodes.map((comment: any) => ({
 				id: comment.id,
 				body: comment.body,
-				createdAt: comment.createdAt.toISOString(),
+				createdAt: this.toSafeISOString(comment.createdAt)!,
 				user: {
 					id: comment.user.id,
 					name: comment.user.name

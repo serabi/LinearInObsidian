@@ -221,3 +221,6 @@ dist/
 # Obsidian
 .obsidian/workspace
 data.json
+
+# BRAT documentation (internal use only)
+BRAT.md

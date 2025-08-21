@@ -1,6 +1,6 @@
 {
 	"name": "linear-in-obsidian",
-	"version": "1.0.0",
+	"version": "1.0.3",
 	"description": "A powerful Obsidian plugin that brings Linear project management directly into your knowledge workspace with comprehensive issue tracking, project views, and bidirectional linking",
 	"main": "main.js",
 	"scripts": {
